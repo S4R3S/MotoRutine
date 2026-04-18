@@ -1,0 +1,65 @@
+// Version: 1.0.0
+type JobId__339598917 = Nat;
+type JobStatus__374926235 = {#completed; #in_progress; #pending};
+type Job__848768964 =
+  {
+    completedAt : ?Timestamp__301639476;
+    cost : Nat;
+    createdAt : Timestamp__301639476;
+    description : Text;
+    id : JobId__339598917;
+    status : JobStatus__374926235;
+    title : Text;
+    vehicleId : VehicleId__963797663
+  };
+type MaintenanceId__961616000 = Nat;
+type MaintenanceItem__1048086204 =
+  {
+    completedAt : ?Timestamp__301639476;
+    description : Text;
+    dueDate : Timestamp__301639476;
+    id : MaintenanceId__961616000;
+    status : MaintenanceStatus__41362791;
+    title : Text;
+    vehicleId : VehicleId__963797663
+  };
+type MaintenanceStatus__41362791 = {#completed; #overdue; #upcoming};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Timestamp__301639476 = Int;
+type VehicleId__963797663 = Nat;
+type VehicleType__173044994 = {#auto; #moto};
+type Vehicle__553412953 =
+  {
+    brand : Text;
+    id : VehicleId__963797663;
+    licensePlate : Text;
+    model : Text;
+    name : Text;
+    vehicleType : VehicleType__173044994;
+    year : Nat
+  };
+actor {
+  stable jobs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Job__848768964]];
+      var elementIndex : Nat__490723111
+    };
+  stable maintenanceItems :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MaintenanceItem__1048086204]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextJobId : {var value : Nat};
+  stable nextMaintenanceId : {var value : Nat};
+  stable nextVehicleId : {var value : Nat};
+  stable sampleNow : Int;
+  stable vehicles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Vehicle__553412953]];
+      var elementIndex : Nat__490723111
+    }
+};

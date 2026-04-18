@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "General Sans";
+    --font-body: "Figtree";
+    --font-mono: "Geist Mono";
+    --radius: 0.25rem;
+
+    /* Background: #0B0E14 → oklch(0.103 0.018 254) */
+    --background: 0.103 0.018 254;
+    /* Main text: #FFFFFF */
+    --foreground: 1.0 0 0;
+
+    /* Cards/sidebar: #161B22 → oklch(0.147 0.016 254) */
+    --card: 0.147 0.016 254;
+    --card-foreground: 1.0 0 0;
+    --popover: 0.147 0.016 254;
+    --popover-foreground: 1.0 0 0;
+
+    /* Primary accent: #3B82F6 → oklch(0.623 0.214 259) */
+    --primary: 0.623 0.214 259;
+    --primary-foreground: 1.0 0 0;
+
+    /* Pending/warning: #F59E0B → oklch(0.764 0.176 70) */
+    --secondary: 0.764 0.176 70;
+    --secondary-foreground: 0.103 0.018 254;
+
+    /* Muted surface: slightly lighter than card */
+    --muted: 0.19 0.016 254;
+    /* Secondary text: #94A3B8 → oklch(0.671 0.026 251) */
+    --muted-foreground: 0.671 0.026 251;
+
+    /* Success: #10B981 → oklch(0.696 0.17 162) */
+    --accent: 0.696 0.17 162;
+    --accent-foreground: 0.103 0.018 254;
+
+    /* Danger/expired: #EF4444 → oklch(0.627 0.222 27) */
+    --destructive: 0.627 0.222 27;
+    --destructive-foreground: 1.0 0 0;
+
+    /* Borders: subtle dark separator */
+    --border: 0.24 0.016 254;
+    --input: 0.24 0.016 254;
+    --ring: 0.623 0.214 259;
+
+    /* Charts */
+    --chart-1: 0.696 0.17 162;
+    --chart-2: 0.623 0.214 259;
+    --chart-3: 0.764 0.176 70;
+    --chart-4: 0.627 0.222 27;
+    --chart-5: 0.671 0.026 251;
+
+    /* Sidebar: same as card (#161B22) */
+    --sidebar: 0.147 0.016 254;
+    --sidebar-foreground: 1.0 0 0;
+    --sidebar-primary: 0.623 0.214 259;
+    --sidebar-primary-foreground: 1.0 0 0;
+    --sidebar-accent: 0.764 0.176 70;
+    --sidebar-accent-foreground: 0.103 0.018 254;
+    --sidebar-border: 0.24 0.016 254;
+    --sidebar-ring: 0.623 0.214 259;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Status badges — each uses a direct bg color for precision */
+
+  /* Completado (green #10B981) */
+  .badge-success {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold;
+    background-color: oklch(0.696 0.17 162 / 0.2);
+    color: oklch(0.696 0.17 162);
+    border: 1px solid oklch(0.696 0.17 162 / 0.35);
+  }
+
+  /* Warning generic (amber #F59E0B) */
+  .badge-warning {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold;
+    background-color: oklch(0.764 0.176 70 / 0.2);
+    color: oklch(0.764 0.176 70);
+    border: 1px solid oklch(0.764 0.176 70 / 0.35);
+  }
+
+  /* Pendiente (amber #F59E0B) */
+  .badge-pending {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold;
+    background-color: oklch(0.764 0.176 70 / 0.2);
+    color: oklch(0.764 0.176 70);
+    border: 1px solid oklch(0.764 0.176 70 / 0.35);
+  }
+
+  /* En Progreso (blue #3B82F6) */
+  .badge-in-progress {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold;
+    background-color: oklch(0.623 0.214 259 / 0.2);
+    color: oklch(0.623 0.214 259);
+    border: 1px solid oklch(0.623 0.214 259 / 0.35);
+  }
+
+  /* Vencido / Overdue (red #EF4444) */
+  .badge-overdue {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold;
+    background-color: oklch(0.627 0.222 27 / 0.2);
+    color: oklch(0.627 0.222 27);
+    border: 1px solid oklch(0.627 0.222 27 / 0.35);
+  }
+
+  /* Próximo / Upcoming (green #10B981) */
+  .badge-upcoming {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold;
+    background-color: oklch(0.696 0.17 162 / 0.2);
+    color: oklch(0.696 0.17 162);
+    border: 1px solid oklch(0.696 0.17 162 / 0.35);
+  }
+
+  /* Metric cards with left border color coding */
+  .metric-card {
+    @apply bg-card border border-border rounded-md p-4 shadow-subtle;
+  }
+  /* Blue #3B82F6 */
+  .metric-card-primary {
+    @apply metric-card border-l-4;
+    border-left-color: oklch(0.623 0.214 259);
+  }
+  /* Amber #F59E0B */
+  .metric-card-secondary {
+    @apply metric-card border-l-4;
+    border-left-color: oklch(0.764 0.176 70);
+  }
+  /* Red #EF4444 */
+  .metric-card-accent {
+    @apply metric-card border-l-4;
+    border-left-color: oklch(0.627 0.222 27);
+  }
+  /* Slate #94A3B8 */
+  .metric-card-muted {
+    @apply metric-card border-l-4;
+    border-left-color: oklch(0.671 0.026 251);
+  }
+
+  .metric-value {
+    @apply text-3xl font-bold text-foreground font-display;
+  }
+  .metric-label {
+    @apply text-sm font-semibold text-foreground font-display;
+  }
+  .metric-sublabel {
+    @apply text-xs text-muted-foreground font-body mt-0.5;
+  }
+
+  /* List items */
+  .list-item {
+    @apply border-b border-border py-3 last:border-b-0;
+  }
+
+  /* Section card */
+  .section-card {
+    @apply bg-card border border-border rounded-md shadow-subtle;
+  }
+  .section-header {
+    @apply px-4 py-3 border-b border-border;
+  }
+  .section-title {
+    @apply text-sm font-semibold text-foreground font-display;
+  }
+}

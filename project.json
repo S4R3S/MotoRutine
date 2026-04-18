@@ -1,0 +1,20 @@
+{
+  "overview": "A vehicle tracking app for motorcycles and cars. Dashboard shows summary metrics for vehicles, pending jobs, overdue maintenance, and total expenses. Includes recent jobs with status badges and an upcoming/overdue maintenance schedule.",
+  "features": [
+    "Dashboard with 4 summary metric cards (Vehicles, Pending Jobs, Overdue Maintenance, Total Expenses)",
+    "Recent Jobs section showing last 3 jobs with status badges (Completado / En Progreso / Pendiente)",
+    "Maintenance Schedule section with upcoming and overdue items, due dates, and urgency badges (Próximo / Vencido)",
+    "Data persistence via backend canister state",
+    "Responsive layout optimized for quick at-a-glance information"
+  ],
+  "category": "productivity",
+  "tags": [
+    "vehicles",
+    "maintenance",
+    "tracking",
+    "dashboard",
+    "automotive",
+    "spanish"
+  ],
+  "last_updated": "2026-04-18T19:30:19.065Z"
+}

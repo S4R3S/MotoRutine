@@ -1,0 +1,119 @@
+type VehicleType = 
+ variant {
+   auto;
+   moto;
+ };
+type VehicleId = nat;
+type Vehicle = 
+ record {
+   brand: text;
+   id: VehicleId;
+   licensePlate: text;
+   model: text;
+   name: text;
+   vehicleType: VehicleType;
+   year: nat;
+ };
+type UpdateMaintenanceRequest = 
+ record {
+   completedAt: opt Timestamp;
+   description: opt text;
+   dueDate: opt Timestamp;
+   status: opt MaintenanceStatus;
+   title: opt text;
+ };
+type UpdateJobRequest = 
+ record {
+   completedAt: opt Timestamp;
+   cost: opt nat;
+   description: opt text;
+   status: opt JobStatus;
+   title: opt text;
+ };
+type Timestamp = int;
+type MaintenanceStatus = 
+ variant {
+   completed;
+   overdue;
+   upcoming;
+ };
+type MaintenanceItem = 
+ record {
+   completedAt: opt Timestamp;
+   description: text;
+   dueDate: Timestamp;
+   id: MaintenanceId;
+   status: MaintenanceStatus;
+   title: text;
+   vehicleId: VehicleId;
+ };
+type MaintenanceId = nat;
+type JobStatus = 
+ variant {
+   completed;
+   in_progress;
+   pending;
+ };
+type JobId = nat;
+type Job = 
+ record {
+   completedAt: opt Timestamp;
+   cost: nat;
+   createdAt: Timestamp;
+   description: text;
+   id: JobId;
+   status: JobStatus;
+   title: text;
+   vehicleId: VehicleId;
+ };
+type DashboardSummary = 
+ record {
+   overdueMaintenanceCount: nat;
+   pendingJobsCount: nat;
+   totalExpenses: nat;
+   vehicleCount: nat;
+ };
+type CreateVehicleRequest = 
+ record {
+   brand: text;
+   licensePlate: text;
+   model: text;
+   name: text;
+   vehicleType: VehicleType;
+   year: nat;
+ };
+type CreateMaintenanceRequest = 
+ record {
+   description: text;
+   dueDate: Timestamp;
+   title: text;
+   vehicleId: VehicleId;
+ };
+type CreateJobRequest = 
+ record {
+   cost: nat;
+   description: text;
+   title: text;
+   vehicleId: VehicleId;
+ };
+service : {
+  addJob: (req: CreateJobRequest) -> (Job);
+  addMaintenance: (req: CreateMaintenanceRequest) -> (MaintenanceItem);
+  addVehicle: (req: CreateVehicleRequest) -> (Vehicle);
+  deleteJob: (id: JobId) -> (bool);
+  deleteMaintenance: (id: MaintenanceId) -> (bool);
+  deleteVehicle: (id: VehicleId) -> (bool);
+  getDashboardSummary: () -> (DashboardSummary) query;
+  getJob: (id: JobId) -> (opt Job) query;
+  getMaintenance: (id: MaintenanceId) -> (opt MaintenanceItem) query;
+  getRecentJobs: () -> (vec Job) query;
+  getUpcomingOrOverdueMaintenance: () -> (vec MaintenanceItem) query;
+  getVehicle: (id: VehicleId) -> (opt Vehicle) query;
+  listJobs: () -> (vec Job) query;
+  listMaintenance: () -> (vec MaintenanceItem) query;
+  listVehicles: () -> (vec Vehicle) query;
+  updateJob: (id: JobId, req: UpdateJobRequest) -> (opt Job);
+  updateMaintenance: (id: MaintenanceId, req: UpdateMaintenanceRequest) ->
+   (opt MaintenanceItem);
+  updateVehicle: (id: VehicleId, req: CreateVehicleRequest) -> (opt Vehicle);
+}
